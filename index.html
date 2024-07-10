@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tantowish Gallery</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+      }
+      body {
+        background: #191919;
+      }
+      .gallery {
+        width: 900px;
+        display: flex;
+        overflow-x: scroll;
+      }
+      .gallery div {
+        width: 100%;
+        display: grid;
+        grid-template-columns: auto auto auto;
+        grid-gap: 20px;
+        padding: 10px;
+        flex: none;
+      }
+      .gallery div img {
+        width: 100%;
+        filter: grayscale(100%);
+        transition: transform 0.5s;
+
+      }
+      .gallery div img:hover {
+        filter: grayscale(0);
+        cursor: pointer;
+        transform: scale(1.1);
+      }
+      .gallery::-webkit-scrollbar{
+        display: none;
+      }
+      .gallery-wrap{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 10% auto;
+      }
+      #backBtn, #nextBtn{
+        width: 50px;
+        margin: 40px;
+        cursor: pointer;
+      } 
+    </style>
+  </head>
+  <body>
+    <div class="gallery-wrap">
+        <img src="back.png" id="backBtn">
+        <div class="gallery">
+            <div>
+              <span><img src="1.jpg" alt="" /></span>
+              <span><img src="2.jpg" alt="" /></span>
+              <span><img src="3.jpg" alt="" /></span>
+            </div>
+            <div>
+              <span><img src="4.jpg" alt="" /></span>
+              <span><img src="5.jpg" alt="" /></span>
+              <span><img src="6.jpg" alt="" /></span>
+            </div>
+          </div>
+        <img src="next.png" id="nextBtn">
+
+    </div>
+  
+    <script>
+        var scrollGallery = document.querySelector(".gallery");
+        var backBtn = document.getElementById('backBtn');
+        var nextBtn = document.getElementById('nextBtn');
+
+        scrollGallery.addEventListener("wheel" , (evt) => {
+            evt.preventDefault();
+            scrollGallery.scrollLeft -= evt.deltaY;
+            scrollGallery.style.scrollBehavior = "auto";
+
+        }) 
+
+        backBtn.addEventListener('click', () => {
+            scrollGallery.style.scrollBehavior = "smooth";
+            scrollGallery.scrollLeft -= 900;
+        });
+
+        nextBtn.addEventListener('click', () => {
+            scrollGallery.style.scrollBehavior = "smooth"; 
+            scrollGallery.scrollLeft += 900;
+        });
+
+    </script>
+  </body>
+</html>
